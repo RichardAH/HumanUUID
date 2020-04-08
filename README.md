@@ -18,8 +18,8 @@ The input data to the hash routine must follow the below rules to ensure determi
 3. Given names fit in a single field. Where more than one name is given a null character is inserted between the names.
 4. Names fields may be truncated if the legitimate contents according to the above rules of the field is longer than 64 characters.
 5. Abbreviations must not be used.
-6. If the country does no issue birth certificate IDs then this field is left blank (all null characters)
-7. All datatypes are to be written in big endian in the order they appear in Table 5 to a buffer of exactly 8256 bytes. The data in this buffer then becomes the input to the hash function.
+6. If the country does not issue birth certificate IDs then this field is left blank (all null characters)
+7. All datatypes are to be written in big endian in the order they appear in Table 5 to a buffer of exactly 1032 bytes. The data in this buffer then becomes the input to the hash function.
 
 ## 5. Input Data Schema
 | Field Type | Field Content |
