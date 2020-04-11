@@ -1,0 +1,28 @@
+{
+  "name": "humanuuid",
+  "version": "0.1.0",
+  "description": "A universally unique identifier UUID for natural people deterministically generated from their birth certificate details",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codetsunami/HumanUUID.git"
+  },
+  "keywords": [
+    "identity",
+    "humanuuid",
+    "uuid"
+  ],
+  "author": "Richard Holland",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codetsunami/HumanUUID/issues"
+  },
+  "homepage": "https://github.com/codetsunami/HumanUUID#readme",
+  "dependencies": {
+    "iconv": "^2.3.5",
+    "libsodium-wrappers-sumo": "^0.7.6"
+  }
+}

@@ -1,4 +1,7 @@
 # HumanUUID
+## 0. Warning
+Alpha!
+
 ## 1. Introduction
 In the age of information it is often necessary to refer to unique individuals without direct reference to sensitive personal information. A standardized cryptographically secure computationally intensive hash can serve to produce a universally unique identifier *UUID* from the relatively small set of immutable information each of us was born with.
 
@@ -15,6 +18,7 @@ The input data to the hash routine must follow the below rules to ensure determi
 
 1. All data used in the hash must be sourced from the person's **official birth certificate.** However the data should also be checked against another form of government ID before a notary generates a `HumanUUID`.
 2. All names (including place names) are `UTF-32BE` encoded in 64 character fields. Unused characters must be filled with the null character `\u00000000`.
+3. All names, including place names must be in the exact case -- in the exact characters -- specified on the birth certificate. E.g. John Smith
 3. Given names fit in a single field. Where more than one name is given a null character is inserted between the names.
 4. Names fields may be truncated if the legitimate contents according to the above rules of the field is longer than 64 characters.
 5. Abbreviations must not be used.
@@ -38,3 +42,13 @@ Note: UTF-32BE does not use a header like `\u0000fffe`, the byte of the field is
 \* Exactly as listed on birth certificate.
 ^ ISO3166-1 code converted from country of issue as it appears on birth certificate
 ~ According to Gregorian calendar. Years are C.E. Month starts 1. Day starts from 1.
+
+## 6. Reference Implementation Usage
+```js
+    const HumanUUID = require('./humanuuid.js')
+    HumanUUID.generate_easy('Smith', 'John Apple', '10001', 'San Francisco', 000, 1901, 1, 1).then(
+        uuidhex => {
+            console.log(uuidhex) // print the HumanUUID generated for John Apple Smith
+        }
+    )
+```
