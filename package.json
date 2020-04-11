@@ -1,6 +1,6 @@
 {
   "name": "humanuuid",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A universally unique identifier UUID for natural people deterministically generated from their birth certificate details",
   "main": "index.js",
   "scripts": {

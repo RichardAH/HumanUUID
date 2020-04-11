@@ -8,6 +8,8 @@ In the age of information it is often necessary to refer to unique individuals w
 ## 2. Hash Algorithm
 [Argon2 v1.3](https://github.com/P-H-C/phc-winner-argon2/raw/master/argon2-specs.pdf) is used due to its computational intensity and suitability for password (short input) hashing. Specifically the crypto_pwhash() routine in [Libsodium 1.0.18](https://github.com/jedisct1/libsodium/releases) is used with algorithm`crypto_pwhash_ALG_ARGON2ID13` and CPU and memory limits: `crypto_pwhash_OPSLIMIT_SENSITIVE`, `crypto_pwhash_MEMLIMIT_SENSITIVE` respectively.
 
+The `salt` parameter must be a buffer containing the following bytes `[0x48,0x75,0x6d,0x61,0x6e,0x55,0x55,0x49,0x44,0x30,0x30,0x30,0x30,0x30,0x30,0x30]`.
+
 ## 3. Intended Generators
 The intended generator of a `HumanUUID` is a notary: some person of trust who will verify the authenticity of the human's birth certificate and use the information thereon to publicly declare a true and accurate `HumanUUID` according to the rules of this specification.
 

@@ -1,7 +1,7 @@
 // HumanUUID a universal identifier for natural people based on birth certificate details
 // Author: Richard Holland
 // Date: 2020-04-12
-// Version: 0.1 (warning-alpha)
+// Version: 0.2 (warning-alpha)
 
 const sodium = require('libsodium-wrappers-sumo');
 const assert = require('assert')
@@ -43,10 +43,10 @@ async function generate_easy(
     birth_certificate_id = birth_certificate_id.replace(/ +/g, '\x00')
     place_of_birth = place_of_birth.replace(/ +/g, '\x00')
     
-    family_name += ' '.repeat(Math.max(0, 64 - family_name.length))
-    given_names += ' '.repeat(Math.max(0, 64 - given_names.length))
-    birth_certificate_id += ' '.repeat(Math.max(0, 64 - birth_certificate_id.length))
-    place_of_birth += ' '.repeat(Math.max(0, 64 - place_of_birth.length))
+    family_name += '\x00'.repeat(Math.max(0, 64 - family_name.length))
+    given_names += '\x00'.repeat(Math.max(0, 64 - given_names.length))
+    birth_certificate_id += '\x00'.repeat(Math.max(0, 64 - birth_certificate_id.length))
+    place_of_birth += '\x00'.repeat(Math.max(0, 64 - place_of_birth.length))
 
     // prepare the converter
     var conv = new iconv('ISO-8859-1', 'UTF-32BE')
@@ -66,7 +66,7 @@ async function generate_easy(
     month_of_birth_buf[0] = month_of_birth
 
     day_of_birth_buf = new Uint8Array(1)
-    day_of_birth_buf[0] = month_of_birth
+    day_of_birth_buf[0] = day_of_birth
 
     // finally perform the actual HumanUUID generation
     return generate(  
@@ -161,8 +161,10 @@ async function generate (
 
     assert(upto == 1032, "fatal: buffers wrong length")
 
+    var salt = new Uint8Array([ 0x48,0x75,0x6d,0x61,0x6e,0x55,0x55,0x49,0x44,0x30,0x30,0x30,0x30,0x30,0x30,0x30 ])
+
     return new Promise ( resolve => {
-        resolve(Buffer.from(sodium.crypto_pwhash( 16, buf, 'HumanUUID0000000', sodium.crypto_pwhash_OPSLIMIT_SENSITIVE, sodium.crypto_pwhash_MEMLIMIT_SENSITIVE, sodium.crypto_pwhash_ALG_ARGON2ID13 )).toString('hex'))
+        resolve(Buffer.from(sodium.crypto_pwhash( 16, buf, salt, sodium.crypto_pwhash_OPSLIMIT_SENSITIVE, sodium.crypto_pwhash_MEMLIMIT_SENSITIVE, sodium.crypto_pwhash_ALG_ARGON2ID13 )).toString('hex'))
     })
 
 }
