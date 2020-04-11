@@ -14,20 +14,22 @@ In addition any party with KYC/AML requirements might also generate a `HumanUUID
 The input data to the hash routine must follow the below rules to ensure deterministic generation of the same `HumanUUID` for the same person from two different generators.
 
 1. All data used in the hash must be sourced from the person's **official birth certificate.** However the data should also be checked against another form of government ID before a notary generates a `HumanUUID`.
-2. All names (including place names) are `UTF-32` encoded in 64 character fields. Unused characters must be filled with the null character `\u00000000`.
+2. All names (including place names) are `UTF-32BE` encoded in 64 character fields. Unused characters must be filled with the null character `\u00000000`.
 3. Given names fit in a single field. Where more than one name is given a null character is inserted between the names.
 4. Names fields may be truncated if the legitimate contents according to the above rules of the field is longer than 64 characters.
 5. Abbreviations must not be used.
 6. If the country does not issue birth certificate IDs then this field is left blank (all null characters)
 7. All datatypes are to be written in big endian in the order they appear in Table 5 to a buffer of exactly 1032 bytes. The data in this buffer then becomes the input to the hash function.
 
+Note: UTF-32BE does not use a header like `\u0000fffe`, the byte of the field is the most significant byte of the first code unit. [UTF-32BE Rules - See D99](http://www.unicode.org/versions/Unicode5.0.0/ch03.pdf)
+
 ## 5. Input Data Schema
 | Field Type | Field Content |
 |:------------|:-------------|
-|UTF-32 [64]|Family Name *|
-|UTF-32 [64]|Given Names *|
-|UTF-32 [64]|Birth Certificate ID *|
-|UTF-32 [64]|Place of Birth *|
+|UTF-32BE [64]|Family Name *|
+|UTF-32BE [64]|Given Names *|
+|UTF-32BE [64]|Birth Certificate ID *|
+|UTF-32BE [64]|Place of Birth *|
 |uint32_t|ISO_3166 Numeric Code ^|
 |uint16_t|Year of Birth ~|
 |uint8_t|Month of Birth ~|
