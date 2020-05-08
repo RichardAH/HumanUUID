@@ -3,7 +3,7 @@
 HumanUUID is in the Public Domain
 
 ## 1. Introduction
-In the age of information it is often necessary to refer to unique individuals without direct reference to sensitive personal information. A standardized cryptographically secure computationally intensive hash can serve to produce a universally unique identifier *UUID* from the relatively small set of immutable information each of us was born with.
+In the age of information it is often necessary to refer to unique individuals without direct reference to sensitive personal information. A standardized cryptographically secure computationally intensive hash can serve to produce a `128 bit universally unique identifier` from the relatively small set of immutable information each of us was born with.
 
 ## 2. Hash Algorithm
 [Argon2 v1.3](https://github.com/P-H-C/phc-winner-argon2/raw/master/argon2-specs.pdf) is used due to its computational intensity and suitability for password (short input) hashing. Specifically the crypto_pwhash() routine in [Libsodium 1.0.18](https://github.com/jedisct1/libsodium/releases) is used with algorithm`crypto_pwhash_ALG_ARGON2ID13` and CPU and memory limits: `crypto_pwhash_OPSLIMIT_SENSITIVE`, `crypto_pwhash_MEMLIMIT_SENSITIVE` respectively.
