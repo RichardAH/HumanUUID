@@ -1,6 +1,6 @@
 # HumanUUID
-## 0. Warning
-Alpha!
+## License
+HumanUUID is in the Public Domain
 
 ## 1. Introduction
 In the age of information it is often necessary to refer to unique individuals without direct reference to sensitive personal information. A standardized cryptographically secure computationally intensive hash can serve to produce a universally unique identifier *UUID* from the relatively small set of immutable information each of us was born with.
@@ -46,6 +46,7 @@ Note: UTF-32BE does not use a header like `\u0000fffe`, the byte of the field is
 ~ According to Gregorian calendar. Years are C.E. Month starts 1. Day starts from 1.
 
 ## 6. Reference Implementation Usage
+Warning Reference Implementation is in Alpha
 ```js
     const HumanUUID = require('./humanuuid.js')
     HumanUUID.generate_easy('Smith', 'John Apple', '10001', 'San Francisco', 000, 1901, 1, 1).then(
